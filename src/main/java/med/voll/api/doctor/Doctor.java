@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.address.Address;
+import org.hibernate.sql.Update;
 
 @Table(name = "doctors")
 @Entity
@@ -38,4 +39,15 @@ public class Doctor {
         this.address = new Address(data.address());
     }
 
+    public void update(UpdateDoctorData data) {
+        if(data.name() != null) {
+            this.name = data.name();
+        }
+        if(data.phone() != null) {
+            this.phone = data.phone();
+        }
+        if(data.address() != null) {
+            this.address.update(data.address());
+        }
+    }
 }
